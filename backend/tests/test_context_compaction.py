@@ -54,10 +54,12 @@ class TestTokenBudget:
 class TestCompactionEngine:
     @pytest.fixture
     def engine(self):
-        return CompactionEngine(CompactionConfig(
-            max_estimated_tokens=20,
-            preserve_recent_messages=2,
-        ))
+        return CompactionEngine(
+            CompactionConfig(
+                max_estimated_tokens=20,
+                preserve_recent_messages=2,
+            )
+        )
 
     @pytest.fixture
     def long_conversation(self):

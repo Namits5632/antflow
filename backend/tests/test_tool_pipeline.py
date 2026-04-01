@@ -1,6 +1,5 @@
 """Tests for the tool execution pipeline (deerflow.tools.execution)."""
 
-
 from deerflow.hooks.runner import HookRunner
 from deerflow.hooks.types import HookConfig
 from deerflow.permissions.mode import PermissionMode
@@ -40,9 +39,11 @@ class TestToolExecutionPipeline:
 
     def test_pre_hook_deny_blocks(self):
         pipeline = ToolExecutionPipeline(
-            hook_runner=HookRunner([
-                HookConfig(command="echo 'no' && exit 2", events=["pre_tool_use"]),
-            ]),
+            hook_runner=HookRunner(
+                [
+                    HookConfig(command="echo 'no' && exit 2", events=["pre_tool_use"]),
+                ]
+            ),
         )
         ctx = ToolCallContext(tool_name="bash", tool_input={})
         result = pipeline.execute(ctx, _echo_executor)
@@ -51,9 +52,11 @@ class TestToolExecutionPipeline:
 
     def test_pre_hook_feedback_merged(self):
         pipeline = ToolExecutionPipeline(
-            hook_runner=HookRunner([
-                HookConfig(command="echo 'audit logged'", events=["pre_tool_use"]),
-            ]),
+            hook_runner=HookRunner(
+                [
+                    HookConfig(command="echo 'audit logged'", events=["pre_tool_use"]),
+                ]
+            ),
         )
         ctx = ToolCallContext(tool_name="bash", tool_input={})
         result = pipeline.execute(ctx, _echo_executor)

@@ -1,6 +1,5 @@
 """Tests for the layered permission model (deerflow.permissions)."""
 
-
 from deerflow.permissions.mode import PermissionMode
 from deerflow.permissions.policy import PermissionOutcome, PermissionPolicy
 from deerflow.permissions.prompter import AutoAllowPrompter, AutoDenyPrompter

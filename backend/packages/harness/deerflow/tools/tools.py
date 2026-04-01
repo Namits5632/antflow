@@ -141,9 +141,7 @@ def get_available_tools(
             existing_names = {t.name for t in loaded_tools + builtin_tools + mcp_tools + acp_tools}
             registry = discover_plugins(plugins_cfg.directories, builtin_tool_names=existing_names)
             for plugin in registry.plugins:
-                plugin_tools.extend(
-                    create_plugin_tools(plugin.tools, plugin_name=plugin.name, plugin_root=str(plugin.root_path))
-                )
+                plugin_tools.extend(create_plugin_tools(plugin.tools, plugin_name=plugin.name, plugin_root=str(plugin.root_path)))
             if plugin_tools:
                 logger.info("Loaded %d plugin tool(s) from %d plugin(s)", len(plugin_tools), len(registry.plugins))
     except Exception as e:
@@ -152,6 +150,10 @@ def get_available_tools(
     logger.info(
         "Total tools loaded: %d (config=%d, builtin=%d, MCP=%d, ACP=%d, plugin=%d)",
         len(loaded_tools) + len(builtin_tools) + len(mcp_tools) + len(acp_tools) + len(plugin_tools),
-        len(loaded_tools), len(builtin_tools), len(mcp_tools), len(acp_tools), len(plugin_tools),
+        len(loaded_tools),
+        len(builtin_tools),
+        len(mcp_tools),
+        len(acp_tools),
+        len(plugin_tools),
     )
     return loaded_tools + builtin_tools + mcp_tools + acp_tools + plugin_tools

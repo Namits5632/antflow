@@ -1,6 +1,5 @@
 """Tests for the modular prompt builder (deerflow.prompts)."""
 
-
 from deerflow.prompts import SystemPromptBuilder, split_prompt_for_caching
 from deerflow.prompts.sections import SYSTEM_PROMPT_DYNAMIC_BOUNDARY
 
@@ -26,33 +25,19 @@ class TestSystemPromptBuilder:
         assert "<linter_feedback>" in static
 
     def test_dynamic_sections_after_boundary(self):
-        prompt = (
-            SystemPromptBuilder()
-            .with_memory("[Memory] user prefers Chinese")
-            .with_skills("[Skills] web_search")
-            .build()
-        )
+        prompt = SystemPromptBuilder().with_memory("[Memory] user prefers Chinese").with_skills("[Skills] web_search").build()
         idx = prompt.index(SYSTEM_PROMPT_DYNAMIC_BOUNDARY)
         dynamic = prompt[idx:]
         assert "[Memory]" in dynamic
         assert "[Skills]" in dynamic
 
     def test_environment_injection(self):
-        prompt = (
-            SystemPromptBuilder()
-            .with_environment(cwd="/workspace", date_str="2026-04-01")
-            .build()
-        )
+        prompt = SystemPromptBuilder().with_environment(cwd="/workspace", date_str="2026-04-01").build()
         assert "/workspace" in prompt
         assert "2026-04-01" in prompt
 
     def test_specialized_agents(self):
-        prompt = (
-            SystemPromptBuilder()
-            .with_subagent("subagent section", enabled=True)
-            .with_specialized_agents(verification=True, explore=True, plan=True)
-            .build()
-        )
+        prompt = SystemPromptBuilder().with_subagent("subagent section", enabled=True).with_specialized_agents(verification=True, explore=True, plan=True).build()
         assert "verification" in prompt
         assert "explore" in prompt
 
@@ -63,12 +48,7 @@ class TestSystemPromptBuilder:
         assert builder.with_environment() is builder
 
     def test_extra_sections(self):
-        prompt = (
-            SystemPromptBuilder()
-            .add_static_section("<custom_static>test</custom_static>")
-            .add_dynamic_section("<custom_dynamic>test</custom_dynamic>")
-            .build()
-        )
+        prompt = SystemPromptBuilder().add_static_section("<custom_static>test</custom_static>").add_dynamic_section("<custom_dynamic>test</custom_dynamic>").build()
         idx = prompt.index(SYSTEM_PROMPT_DYNAMIC_BOUNDARY)
         assert "<custom_static>" in prompt[:idx]
         assert "<custom_dynamic>" in prompt[idx:]

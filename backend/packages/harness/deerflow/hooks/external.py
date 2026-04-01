@@ -38,6 +38,7 @@ def _get_project_root() -> str:
 
     try:
         from deerflow.config.app_config import AppConfig
+
         config_path = AppConfig.resolve_config_path()
         _project_root = str(config_path.parent)
     except Exception:

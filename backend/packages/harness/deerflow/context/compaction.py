@@ -111,7 +111,7 @@ class CompactionEngine:
         for msg in messages:
             content_str = str(msg.content)
             if isinstance(msg, HumanMessage):
-                snippet = content_str[:self.config.summary_line_budget].strip()
+                snippet = content_str[: self.config.summary_line_budget].strip()
                 if snippet:
                     user_requests.append(snippet)
 
@@ -177,11 +177,11 @@ def _extract_existing_summary(messages: list[BaseMessage]) -> str | None:
             start = content.find(_SUMMARY_TAG)
             end = content.find(_SUMMARY_END_TAG)
             if start != -1 and end != -1:
-                return content[start + len(_SUMMARY_TAG):end].strip()
+                return content[start + len(_SUMMARY_TAG) : end].strip()
     return None
 
 
-_PATH_RE = re.compile(r'(?:/[\w._-]+){2,}')
+_PATH_RE = re.compile(r"(?:/[\w._-]+){2,}")
 
 
 def _extract_paths(text: str) -> set[str]:

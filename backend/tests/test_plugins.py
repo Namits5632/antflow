@@ -1,6 +1,5 @@
 """Tests for the plugin system (deerflow.plugins)."""
 
-
 from deerflow.plugins.manifest import PluginHooksDef, PluginManifest, PluginToolDef
 from deerflow.plugins.registry import PluginRegistry
 
@@ -17,20 +16,24 @@ class TestPluginManifest:
         assert m.version == "0.0.0"
 
     def test_from_dict_with_tools(self):
-        m = PluginManifest.from_dict({
-            "name": "test",
-            "tools": [
-                {"name": "search", "command": "python search.py", "description": "Search"},
-            ],
-        })
+        m = PluginManifest.from_dict(
+            {
+                "name": "test",
+                "tools": [
+                    {"name": "search", "command": "python search.py", "description": "Search"},
+                ],
+            }
+        )
         assert len(m.tools) == 1
         assert m.tools[0].name == "search"
 
     def test_from_dict_invalid_tool_skipped(self):
-        m = PluginManifest.from_dict({
-            "name": "test",
-            "tools": [{"name": ""}],
-        })
+        m = PluginManifest.from_dict(
+            {
+                "name": "test",
+                "tools": [{"name": ""}],
+            }
+        )
         assert len(m.tools) == 0
 
 

@@ -83,13 +83,6 @@ class PermissionPolicy:
             decision = prompter.decide(request)
             if decision.allowed:
                 return PermissionOutcome.allow()
-            return PermissionOutcome.deny(
-                reason=decision.reason or f"User denied permission for tool '{tool_name}'"
-            )
+            return PermissionOutcome.deny(reason=decision.reason or f"User denied permission for tool '{tool_name}'")
 
-        return PermissionOutcome.deny(
-            reason=(
-                f"Tool '{tool_name}' requires {required.name} but session is in "
-                f"{self.active_mode.name} mode"
-            )
-        )
+        return PermissionOutcome.deny(reason=(f"Tool '{tool_name}' requires {required.name} but session is in {self.active_mode.name} mode"))

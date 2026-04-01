@@ -20,7 +20,7 @@ def split_prompt_for_caching(prompt: str) -> tuple[str, str]:
     """
     if SYSTEM_PROMPT_DYNAMIC_BOUNDARY in prompt:
         idx = prompt.index(SYSTEM_PROMPT_DYNAMIC_BOUNDARY)
-        return prompt[:idx], prompt[idx + len(SYSTEM_PROMPT_DYNAMIC_BOUNDARY):]
+        return prompt[:idx], prompt[idx + len(SYSTEM_PROMPT_DYNAMIC_BOUNDARY) :]
     return prompt, ""
 
 

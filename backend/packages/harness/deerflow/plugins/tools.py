@@ -64,11 +64,13 @@ def create_plugin_tools(
     """Convert a list of plugin tool definitions into BaseTool instances."""
     tools: list[BaseTool] = []
     for td in tool_defs:
-        tools.append(PluginTool(
-            name=td.name,
-            description=td.description or f"Plugin tool: {td.name}",
-            command=td.command,
-            plugin_name=plugin_name,
-            plugin_root=plugin_root,
-        ))
+        tools.append(
+            PluginTool(
+                name=td.name,
+                description=td.description or f"Plugin tool: {td.name}",
+                command=td.command,
+                plugin_name=plugin_name,
+                plugin_root=plugin_root,
+            )
+        )
     return tools

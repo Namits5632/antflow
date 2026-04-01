@@ -29,14 +29,9 @@ class PluginRegistry:
 
         for tool in manifest.tools:
             if tool.name in builtins:
-                errors.append(
-                    f"Plugin '{manifest.name}' tool '{tool.name}' conflicts with a builtin tool"
-                )
+                errors.append(f"Plugin '{manifest.name}' tool '{tool.name}' conflicts with a builtin tool")
             elif tool.name in self._tool_owners:
-                errors.append(
-                    f"Plugin '{manifest.name}' tool '{tool.name}' conflicts with "
-                    f"plugin '{self._tool_owners[tool.name]}'"
-                )
+                errors.append(f"Plugin '{manifest.name}' tool '{tool.name}' conflicts with plugin '{self._tool_owners[tool.name]}'")
             else:
                 self._tool_owners[tool.name] = manifest.name
 
@@ -45,9 +40,7 @@ class PluginRegistry:
             return errors
 
         self._plugins.append(manifest)
-        logger.info("Registered plugin '%s' (v%s) — %d tools, hooks=%s",
-                     manifest.name, manifest.version, len(manifest.tools),
-                     bool(manifest.hooks.pre_tool_use or manifest.hooks.post_tool_use))
+        logger.info("Registered plugin '%s' (v%s) — %d tools, hooks=%s", manifest.name, manifest.version, len(manifest.tools), bool(manifest.hooks.pre_tool_use or manifest.hooks.post_tool_use))
         return []
 
     @property

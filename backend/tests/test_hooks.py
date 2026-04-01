@@ -1,6 +1,5 @@
 """Tests for the hook governance layer (deerflow.hooks)."""
 
-
 from deerflow.hooks.external import run_external_hook
 from deerflow.hooks.python_hook import run_python_hook
 from deerflow.hooks.runner import HookRunner
@@ -99,25 +98,31 @@ class TestHookRunner:
         assert not result.is_denied()
 
     def test_deny_short_circuits(self):
-        runner = HookRunner([
-            HookConfig(command="echo 'first'", events=["pre_tool_use"]),
-            HookConfig(command="echo 'nope' && exit 2", events=["pre_tool_use"]),
-        ])
+        runner = HookRunner(
+            [
+                HookConfig(command="echo 'first'", events=["pre_tool_use"]),
+                HookConfig(command="echo 'nope' && exit 2", events=["pre_tool_use"]),
+            ]
+        )
         result = runner.run(HookEvent.PRE_TOOL_USE, "bash")
         assert result.is_denied()
 
     def test_tool_filter_skips_non_matching(self):
-        runner = HookRunner([
-            HookConfig(command="echo 'nope' && exit 2", events=["pre_tool_use"], tools=["bash"]),
-        ])
+        runner = HookRunner(
+            [
+                HookConfig(command="echo 'nope' && exit 2", events=["pre_tool_use"], tools=["bash"]),
+            ]
+        )
         result = runner.run(HookEvent.PRE_TOOL_USE, "read_file")
         assert not result.is_denied()
 
     def test_from_config(self):
-        runner = HookRunner.from_config({
-            "pre_tool_use": [{"command": "echo hi", "tools": ["bash"]}],
-            "post_tool_use": [{"command": "echo done"}],
-        })
+        runner = HookRunner.from_config(
+            {
+                "pre_tool_use": [{"command": "echo hi", "tools": ["bash"]}],
+                "post_tool_use": [{"command": "echo done"}],
+            }
+        )
         assert len(runner._hooks) == 2
 
     def test_empty_runner_allows(self):

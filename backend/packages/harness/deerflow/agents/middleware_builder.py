@@ -244,9 +244,7 @@ def _maybe_add_guardrail_middleware(chain: list[AgentMiddleware]) -> None:
     if "framework" not in kwargs:
         try:
             sig = inspect.signature(provider_cls.__init__)
-            if "framework" in sig.parameters or any(
-                p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()
-            ):
+            if "framework" in sig.parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
                 kwargs["framework"] = "deerflow"
         except (ValueError, TypeError):
             pass

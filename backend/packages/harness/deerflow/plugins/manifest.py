@@ -80,13 +80,15 @@ class PluginManifest:
             if not t.get("command"):
                 errors.append(f"tools[{i}].command is required")
                 continue
-            tools.append(PluginToolDef(
-                name=t["name"],
-                description=t.get("description", ""),
-                command=t["command"],
-                input_schema=t.get("inputSchema", t.get("input_schema", {})),
-                required_permission=t.get("requiredPermission", t.get("required_permission", "danger_full_access")),
-            ))
+            tools.append(
+                PluginToolDef(
+                    name=t["name"],
+                    description=t.get("description", ""),
+                    command=t["command"],
+                    input_schema=t.get("inputSchema", t.get("input_schema", {})),
+                    required_permission=t.get("requiredPermission", t.get("required_permission", "danger_full_access")),
+                )
+            )
 
         hooks_raw = data.get("hooks", {})
         hooks = PluginHooksDef(
