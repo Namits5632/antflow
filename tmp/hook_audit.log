@@ -1,0 +1,3 @@
+
+[23:17:49] EVENT=pre_tool_use TOOL=web_search
+[23:17:49] EVENT=post_tool_use TOOL=web_search
