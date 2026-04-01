@@ -1,6 +1,5 @@
 """Tests for the modular prompt builder (deerflow.prompts)."""
 
-import pytest
 
 from deerflow.prompts import SystemPromptBuilder, split_prompt_for_caching
 from deerflow.prompts.sections import SYSTEM_PROMPT_DYNAMIC_BOUNDARY

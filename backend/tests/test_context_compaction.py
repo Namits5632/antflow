@@ -1,7 +1,6 @@
 """Tests for the context compaction engine (deerflow.context)."""
 
 import pytest
-
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from deerflow.context.budget import TokenBudget

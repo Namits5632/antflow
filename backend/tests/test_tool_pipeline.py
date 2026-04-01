@@ -1,12 +1,11 @@
 """Tests for the tool execution pipeline (deerflow.tools.execution)."""
 
-import pytest
 
 from deerflow.hooks.runner import HookRunner
 from deerflow.hooks.types import HookConfig
 from deerflow.permissions.mode import PermissionMode
 from deerflow.permissions.policy import PermissionPolicy
-from deerflow.tools.execution import PipelineResult, ToolCallContext, ToolExecutionPipeline
+from deerflow.tools.execution import ToolCallContext, ToolExecutionPipeline
 
 
 def _echo_executor(name: str, inp: dict) -> str:

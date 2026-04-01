@@ -1,11 +1,10 @@
 """Tests for the hook governance layer (deerflow.hooks)."""
 
-import pytest
 
-from deerflow.hooks.types import HookConfig, HookEvent, HookPayload, HookResult
 from deerflow.hooks.external import run_external_hook
 from deerflow.hooks.python_hook import run_python_hook
 from deerflow.hooks.runner import HookRunner
+from deerflow.hooks.types import HookConfig, HookEvent, HookPayload, HookResult
 
 
 class TestHookTypes:

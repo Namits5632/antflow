@@ -9,9 +9,9 @@ Inspired by claw-code's ``compact.rs``.
 
 from __future__ import annotations
 
-import re
 import logging
-from dataclasses import dataclass, field
+import re
+from dataclasses import dataclass
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
 

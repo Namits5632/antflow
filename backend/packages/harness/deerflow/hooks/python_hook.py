@@ -7,7 +7,7 @@ notation) instead of external shell commands.
 from __future__ import annotations
 
 import logging
-from typing import Any, Callable
+from collections.abc import Callable
 
 from deerflow.hooks.types import HookPayload, HookResult
 

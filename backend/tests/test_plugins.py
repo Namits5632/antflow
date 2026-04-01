@@ -1,6 +1,5 @@
 """Tests for the plugin system (deerflow.plugins)."""
 
-import pytest
 
 from deerflow.plugins.manifest import PluginHooksDef, PluginManifest, PluginToolDef
 from deerflow.plugins.registry import PluginRegistry

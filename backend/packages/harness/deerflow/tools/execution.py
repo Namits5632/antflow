@@ -22,7 +22,7 @@ from typing import Any
 from deerflow.hooks.runner import HookRunner
 from deerflow.hooks.types import HookEvent, HookResult
 from deerflow.permissions.mode import PermissionMode
-from deerflow.permissions.policy import PermissionOutcome, PermissionPolicy
+from deerflow.permissions.policy import PermissionPolicy
 from deerflow.permissions.prompter import PermissionPrompter
 
 logger = logging.getLogger(__name__)

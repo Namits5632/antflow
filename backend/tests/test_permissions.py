@@ -1,6 +1,5 @@
 """Tests for the layered permission model (deerflow.permissions)."""
 
-import pytest
 
 from deerflow.permissions.mode import PermissionMode
 from deerflow.permissions.policy import PermissionOutcome, PermissionPolicy
