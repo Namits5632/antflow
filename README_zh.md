@@ -10,9 +10,22 @@ AntFlow 是一个**生产级 AI Agent 平台**，基于 [DeerFlow](https://githu
 
 > **为什么叫 AntFlow？** "Ant" 致敬 **Ant**hropic，其 Claude Code 源码启发了本次架构改造。"Flow" 继承自 DeerFlow 的工作流编排基因。
 
+### 改造一览
+
+| 改造项 | 来自 Claude Code | 做了什么 |
+|---|---|---|
+| **权限系统** | 五级分层模型 | 每次工具调用经过 `READ_ONLY` → `ALLOW` 策略检查 |
+| **Hook 治理** | PreToolUse / PostToolUse | 通过 Shell 脚本或 Python 审计、拦截、修改任意工具调用 |
+| **执行管线** | toolExecution.ts | 结构化 5 阶段管线：权限 → PreHook → 执行 → PostHook → 合并 |
+| **Prompt 组装** | getSystemPrompt() | 模块化构建器 + 静态/动态缓存边界，缓存命中率约 88% |
+| **上下文压缩** | compact.rs | 零 LLM 开销的确定性对话压缩 |
+| **插件系统** | plugin.json 清单 | 声明式插件，贡献工具、Hook 和权限 |
+| **专业化子 Agent** | Built-in agents | Explore（只读）、Plan（策略）、Verification（对抗验证） |
+| **Prompt 最佳实践** | Prompt sections | Git 安全协议、Linter 反馈、代码引用、代码修改规范 |
+
 ---
 
-## 我们做了什么 —— Claude Code 架构集成
+## 详细改造 —— Claude Code 架构集成
 
 这不是简单的 prompt 调整或外层包装。我们深入研究了 Claude Code 的源码，并将其**关键工程系统**移植到 DeerFlow 框架中。以下是具体改造内容：
 

@@ -10,9 +10,22 @@ AntFlow is a **production-grade AI agent platform** forked from [DeerFlow](https
 
 > **Why the name?** "Ant" nods to **Ant**hropic, whose Claude Code source code inspired the architectural overhaul. "Flow" inherits from DeerFlow's workflow orchestration DNA.
 
+### What's New at a Glance
+
+| Enhancement | From Claude Code | What It Does |
+|---|---|---|
+| **Permission System** | 5-level layered model | Every tool call checked against `READ_ONLY` → `ALLOW` policy |
+| **Hook Governance** | PreToolUse / PostToolUse | Audit, block, or modify any tool call via shell scripts or Python |
+| **Execution Pipeline** | toolExecution.ts | Structured 5-stage pipeline: Permission → PreHook → Execute → PostHook → Merge |
+| **Prompt Assembly** | getSystemPrompt() | Modular builder with static/dynamic cache boundary, ~88% cache hit |
+| **Context Compaction** | compact.rs | Zero-LLM-cost deterministic compression for long conversations |
+| **Plugin System** | plugin.json manifests | Declarative plugins contributing tools, hooks, and permissions |
+| **Specialized Agents** | Built-in agents | Explore (read-only), Plan (strategy), Verification (adversarial) |
+| **Prompt Best Practices** | Prompt sections | Git safety, linter feedback, code citing, code change rules |
+
 ---
 
-## What We Changed — Claude Code Architecture Integration
+## Detailed Changes — Claude Code Architecture Integration
 
 This is not a thin wrapper or prompt tweak. We studied Claude Code's source code in depth and **ported its key engineering systems** into the DeerFlow harness. Here is what was added:
 
